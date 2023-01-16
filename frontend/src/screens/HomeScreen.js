@@ -7,6 +7,9 @@ import Product from '../components/Product';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
+import React from 'react';
 // import data from '../data';
 
 const reducer = (state, action) => {
@@ -31,14 +34,21 @@ function HomeScreen() {
   const [winery, setWinery] = useState("/all");
   const [location, setLocation] = useState("/all");
   const [year, setYear] = useState("/all");
-
+  const [type, setType] = useState("/all");
+  const [flag, setFlag] = useState("0");
   useEffect(() => {
-
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        let result = await axios.get('/api/products/search' + winery + location + year);
-        console.log("year!!!" + year)
+        let result;
+        console.log(flag + " flag!!!!");
+        if (flag === "0") {
+          result = await axios.get('/api/products/search' + winery + location + year);
+        }
+        else {
+          result = await axios.get('/api/products/search2' + type)
+        }
+        console.log(result)
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: err.message });
@@ -47,28 +57,48 @@ function HomeScreen() {
     };
 
     fetchData();
-  }, [winery, location, year]);
-
+  }, [winery, location, year, type]);
 
   const checkWinery = (e) => {
-    if (e != null)
+    if (e != null) {
+      setFlag("0")
       setWinery('/' + e);
-    else
+    }
+    else {
+      setFlag("0")
       setWinery("")
+    }
   }
   const checkLocation = (e) => {
-    if (e != null)
+    if (e != null) {
+      setFlag("0")
       setLocation('/' + e);
-    else
+    }
+    else {
+      setFlag("0")
       setLocation("")
+    }
   }
   const checkYear = (e) => {
-    if (e != null)
+    if (e != null) {
+      setFlag("0")
       setYear('/' + e);
-    else
+    }
+    else {
+      setFlag("0")
       setYear("")
+    }
   }
-
+  const checkType = (e) => {
+    if (e != null) {
+      setFlag("1");
+      setType('/' + e);
+    }
+    else {
+      setFlag("1")
+      setType("")
+    }
+  }
   return (
     <div>
       <Helmet>
@@ -93,6 +123,14 @@ function HomeScreen() {
         <option value="2010">2010</option>
         <option value="2014">2014</option>
         <option value="2001">2001</option>
+      </select>
+      <br></br>
+      <label for="type">Type: </label>
+      <select name="type" id="type" onChange={(event) => { checkType(event.target.value); }}>
+        <option value="all">all</option>
+        <option value="red">Red</option>
+        <option value="white">White</option>
+        <option value="sparkling">Sparkling</option>
       </select>
       <div className="products">
         {loading ? (

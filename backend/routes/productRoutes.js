@@ -57,6 +57,19 @@ productRouter.get('/search/:winery/:location/:year', async (req, res) => {
     res.status(404).send({ message: 'Product Not Found' });
   }
 });
-
+productRouter.get('/search2/:type', async (req, res) => {
+  let product = [];
+  if (req.params.type === "all") {
+    product = await Product.find();
+  }
+  else if (req.params.type !== "all") {
+    product = await Product.find({ "type": req.params.type });
+  }
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: 'Product Not Found' });
+  }
+});
 
 export default productRouter;
