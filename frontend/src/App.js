@@ -1,19 +1,19 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import HomeScreen from './screens/HomeScreen';
-import LoginScreen from './screens/LoginScreen'
-import RegisterScreen from './screens/RegisterScreen'
-import ProductScreen from './screens/ProductScreen';
-import Navbar from 'react-bootstrap/Navbar';
-import Badge from 'react-bootstrap/Badge';
-import Nav from 'react-bootstrap/Nav';
-import Container from 'react-bootstrap/Container';
-import { LinkContainer } from 'react-router-bootstrap';
-import { useContext } from 'react';
-import { Store } from './Store';
-import CartScreen from './screens/CartScreen';
-import { Login } from './screens/LoginScreen';
-import { Register } from './screens/RegisterScreen';
-
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import ProductScreen from "./screens/ProductScreen";
+import Navbar from "react-bootstrap/Navbar";
+import Badge from "react-bootstrap/Badge";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
+import { LinkContainer } from "react-router-bootstrap";
+import { useContext } from "react";
+import { Store } from "./Store";
+import CartScreen from "./screens/CartScreen";
+import { Login } from "./screens/LoginScreen";
+import { Register } from "./screens/RegisterScreen";
+import React from "react";
 
 function App() {
   const { state } = useContext(Store);
