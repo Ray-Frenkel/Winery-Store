@@ -30,22 +30,22 @@ productRouter.get('/search/:winery/:location/:year', async (req, res) => {
     product = await Product.find();
   }
   else if (req.params.winery !== "all" && req.params.location !== "all" && req.params.year !== "all") {
-    product = await Product.find({ "winery": req.params.winery, "location": req.params.location, "wine": { $regex: req.params.year, $options: 'i' } });
+    product = await Product.find({ "winery": req.params.winery, "location": { $regex: req.params.location, $options: 'i' }, "wine": { $regex: req.params.year, $options: 'i' } });
   }
   else if (req.params.winery !== "all" && req.params.location !== "all") {
-    product = await Product.find({ "winery": req.params.winery, "location": req.params.location });
+    product = await Product.find({ "winery": req.params.winery, "location": { $regex: req.params.location, $options: 'i' } });
   }
   else if (req.params.winery !== "all" && req.params.year !== "all") {
     product = await Product.find({ "winery": req.params.winery, "wine": { $regex: req.params.year, $options: 'i' } });
   }
   else if (req.params.location !== "all" && req.params.year !== "all") {
-    product = await Product.find({ "location": req.params.location, "wine": { $regex: req.params.year, $options: 'i' } });
+    product = await Product.find({ "location": { $regex: req.params.location, $options: 'i' }, "wine": { $regex: req.params.year, $options: 'i' } });
   }
   else if (req.params.winery !== "all") {
     product = await Product.find({ "winery": req.params.winery });
   }
   else if (req.params.location !== "all") {
-    product = await Product.find({ "location": req.params.location });
+    product = await Product.find({ "location": { $regex: req.params.location, $options: 'i' } });
   }
   else if (req.params.year !== "all") {
     product = await Product.find({ "wine": { $regex: req.params.year, $options: 'i' } });

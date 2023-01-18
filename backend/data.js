@@ -2,7 +2,7 @@ let data;
 
 async function getData() {
     try {
-        const response = await fetch('https://api.sampleapis.com/wines/reds');
+        const response = await fetch('https://api.sampleapis.com/wines/whites');
         const wines = await response.json();
         const wines30 = wines.slice(0, 30);
         // wines is now an array of white wines
@@ -10,13 +10,14 @@ async function getData() {
             {
                 ...wine,
                 slug: wine.id,
-                type: "red",
+                type: "white",
                 location: wine.location.split('\n')[0],
                 price: Math.floor(Math.random() * (500 - 100 + 1)) + 50
 
 
             }));
         data = updatedWines;
+        //console.log(data);
     } catch (error) {
         // handle the error
     }
