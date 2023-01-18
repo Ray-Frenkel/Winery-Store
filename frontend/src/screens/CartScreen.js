@@ -38,7 +38,7 @@ export default function CartScreen() {
     var q;
     var email = document.getElementById("email").value;
     var username = document.getElementById("username").value;
-    if (email != "" && username != "") {
+    if (email !== "" && username !== "") {
       document.getElementById("username");
       cartItems.map(
         async (item) => (
