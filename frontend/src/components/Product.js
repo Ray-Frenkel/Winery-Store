@@ -1,9 +1,9 @@
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import axios from 'axios';
-import { useContext } from 'react';
-import { Store } from '../Store';
-
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import axios from "axios";
+import { useContext } from "react";
+import { Store } from "../Store";
+import React from "react";
 function Product(props) {
   const { product } = props;
 
@@ -19,11 +19,11 @@ function Product(props) {
     const data1 = await axios.get(`/api/seed`);
     console.log(data1);
     if (data.countInStock < quantity) {
-      window.alert('Sorry. Product is out of stock');
+      window.alert("Sorry. Product is out of stock");
       return;
     }
     ctxDispatch({
-      type: 'CART_ADD_ITEM',
+      type: "CART_ADD_ITEM",
       payload: { ...item, quantity },
     });
   };
@@ -33,10 +33,17 @@ function Product(props) {
       <img src={product.image} className="card-img-top" alt={product.wine} />
       <Card.Body>
         <Card.Title className="card-title">Winery: {product.winery}</Card.Title>
-        <Card.Text className="card-text">Wine Description: {product.wine}</Card.Text>
+        <Card.Text className="card-text">
+          Wine Description: {product.wine}
+        </Card.Text>
         {/* <Card.Text className="card-text">Location: {product.location}</Card.Text> */}
         <Card.Text className="card-text">Price: ${product.price}</Card.Text>
-        <Button className="btnproduct" onClick={() => addToCartHandler(product)}>Add to cart</Button>
+        <Button
+          className="btnproduct"
+          onClick={() => addToCartHandler(product)}
+        >
+          Add to cart
+        </Button>
       </Card.Body>
     </Card>
   );
