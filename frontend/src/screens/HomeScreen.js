@@ -8,7 +8,10 @@ import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import React from "react";
+import Select from 'react-select';
+
 // import data from '../data';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -24,156 +27,13 @@ const reducer = (state, action) => {
 };
 
 function HomeScreen() {
-  const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
-    products: [],
-    loading: true,
-    error: "",
-  });
-  const [winery, setWinery] = useState("/all");
-  const [location, setLocation] = useState("/all");
-  const [year, setYear] = useState("/all");
-  const [type, setType] = useState("/all")
-  const [flag, setFlag] = useState(0);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      dispatch({ type: "FETCH_REQUEST" });
-      try {
-        let result
-        if (flag == 0) {
-          result = await axios.get(
-            "/api/products/search" + winery + location + year
-          );
-          console.log("flag 0!!!!!!!");
-        }
-        else {
-          result = await axios.get(
-            "/api/products/search2" + type
-          );
-          console.log("flag 1!!!!!!!");
-        }
-        console.log("year!!!" + year);
-        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
-      } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: err.message });
-      }
-    };
-
-    fetchData();
-  }, [winery, location, year, type]);
-
-  const checkWinery = (e) => {
-    if (e != null) {
-      setWinery("/" + e);
-      setFlag(0);
-    }
-    else setWinery("");
-  };
-  const checkLocation = (e) => {
-    if (e != null) {
-      setLocation("/" + e);
-      setFlag(0);
-    }
-    else setLocation("");
-  };
-  const checkYear = (e) => {
-    if (e != null) {
-      setYear("/" + e);
-      setFlag(0);
-    }
-    else setYear("");
-  };
-  const checkType = (e) => {
-    if (e != null) {
-      setType("/" + e);
-      setFlag(1);
-    }
-    else setType("");
-  };
 
   return (
     <div>
       <Helmet>
         <title>Ultimate Wine Store</title>
       </Helmet>
-      <h1>Our Products</h1>
-      <label htmlFor="winery">Winery: </label>
-      <select
-        name="winery"
-        id="winery"
-        onChange={(event) => {
-          checkWinery(event.target.value);
-        }}
-      >
-        <option value="all">all</option>
-        <option value="Domaine Coche-Dury">Domaine Coche-Dury</option>
-        <option value="Domaine de La Romanée-Conti">Domaine de La Romanée-Conti</option>
-        <option value="Catena Zapata"> Catena Zapata</option>
-        <option value="Conterno"> Conterno</option>
-        <option value="Cartuxa"> Cartuxa</option>
-        <option value="Gaja"> Gaja</option>
-
-      </select>
-      <label htmlFor="location">Location: </label>
-      <select
-        name="location"
-        id="location"
-        onChange={(event) => {
-          checkLocation(event.target.value);
-        }}
-      >
-        <option value="all">all</option>
-        <option value="France">France</option>
-        <option value="United States">United States</option>
-        <option value="Italy">Italy</option>
-        <option value="Argentina">Argentina</option>
-        <option value="Portugal">Portugal</option>
-      </select>
-      <label htmlFor="year">Year: </label>
-      <select
-        name="year"
-        id="year"
-        onChange={(event) => {
-          checkYear(event.target.value);
-        }}
-      >
-        <option value="all">all</option>
-        <option value="2010">2010</option>
-        <option value="2014">2014</option>
-        <option value="2001">2001</option>
-      </select>
-      <br></br>
-      <br></br>
-      <label htmlFor="type">Type: </label>
-      <select
-        name="type"
-        id="type"
-        onChange={(event) => {
-          checkType(event.target.value);
-        }}
-      >
-        <option value="all">all</option>
-        <option value="red">Red</option>
-        <option value="white">White</option>
-        <option value="sparkling">Sparkling</option>
-      </select>
-
-      <div className="products">
-        <br></br>
-        {loading ? (
-          <LoadingBox />
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
-          <Row>
-            {products.map((product) => (
-              <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
-                <Product product={product}></Product>
-              </Col>
-            ))}
-          </Row>
-        )}
-      </div>
+      <h1>Welcome to the Premuim Wine Store!</h1>
     </div>
   );
 }

@@ -14,6 +14,7 @@ import CartScreen from "./screens/CartScreen";
 import { Login } from "./screens/LoginScreen";
 import { Register } from "./screens/RegisterScreen";
 import React from "react";
+import CatalogScreen from "./screens/CatalogScreen";
 
 function App() {
   const { state } = useContext(Store);
@@ -34,6 +35,9 @@ function App() {
                 <Link to="/login" className="nav-link">
                   Login
                 </Link>
+                <Link to="/catalog" className="nav-link">
+                  Catalog
+                </Link>
                 <Link to="/cart" className="nav-link">
                   Cart
                   {cart.cartItems.length > 0 && (
@@ -53,6 +57,7 @@ function App() {
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/register" element={<RegisterScreen />} />
               <Route path="/login" element={<LoginScreen />} />
+              <Route path="/catalog" element={<CatalogScreen />} />
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>
