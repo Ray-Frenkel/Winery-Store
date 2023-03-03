@@ -32,6 +32,34 @@ main {
   overflow: hidden;
 }
 
+.homeh1 {
+  text-align: center;
+  color: #4c025f;
+  font-family: 'Brush Script MT', cursive;
+  font-size: 100px;
+  line-height: 160px;
+  font-weight: normal;
+  margin-bottom: 0px;
+  margin-top: 40px;
+  text-align: center;
+  text-shadow: 0 1px 1px #fff;
+}
+
+.para {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.homeh3 {
+  font-family: 'Brush Script MT', cursive;
+}
+
+.card1 {
+  max-width: 20rem;
+  height: 30rem;
+  overflow: hidden;
+  border: transparent;
+}
+
 .card-img-top {
   height: 12rem;
   object-fit: cover;
@@ -53,6 +81,13 @@ main {
   height: 100px;
   object-fit: contain;
   margin-right: 20px;
+}
+
+.card-img-top-home {
+  height: 120px;
+  object-fit: contain;
+  margin-right: 25px;
+  width: 300px;
 }
 
 .btn-primary {
