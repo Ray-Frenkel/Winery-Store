@@ -3,7 +3,8 @@ import data from './data.js';
 import mongoose from 'mongoose';
 import seedRouter from './routes/seedRoutes.js';
 import productRouter from './routes/productRoutes.js';
-import shoppingRouter from './routes/shoppingRouter.js'
+import shoppingRouter from './routes/shoppingRouter.js';
+import AdminRouter from './routes/AdminRouter.js';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 mongoose
@@ -22,6 +23,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/', shoppingRouter);
+app.use('/update', AdminRouter);
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`serve at http://localhost:${port}`);

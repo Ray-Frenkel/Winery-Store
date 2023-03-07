@@ -46,6 +46,10 @@ main {
   overflow: hidden;
 }
 
+.error-message {
+  color: red;
+}
+
 .homeh1 {
   text-align: center;
   color: #4c025f;

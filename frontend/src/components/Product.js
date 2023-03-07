@@ -35,7 +35,7 @@ function Product(props) {
           Wine Description: {product.wine}
         </Card.Text>
         <Card.Text className="card-text">
-          Rating: {product.rating.average}
+          {product.rating.average}
         </Card.Text>
         {/* <Card.Text className="card-text">Location: {product.location}</Card.Text> */}
         <Card.Text className="card-text">Price: ${product.price}</Card.Text>
