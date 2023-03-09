@@ -23,7 +23,7 @@ shoppingRouter.post('/', async (req, res) => {//Post Request - On Buy Now - Get 
             },
         ]
     }
-    const addedShopping = await Shopping.insertMany(data.products);
-    res.send({ addedShopping });
+    //const addedShopping = await Shopping.insertMany(data.products);
+    //res.send({ addedShopping });
 });
 export default shoppingRouter;

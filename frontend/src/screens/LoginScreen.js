@@ -1,5 +1,7 @@
 import { useState } from "react";
 import React from 'react';
+import { createContext } from "react";
+import { Link } from "react-router-dom";
 
 import {
     createUserWithEmailAndPassword,
@@ -44,7 +46,8 @@ function LoginScreen() {
     const logout = async () => {
         await signOut(auth);
     };
-
+    const isAdmin = user.email === "admin@gmail.com";
+    const adminLink = isAdmin ? <Link to="/admin" className="nav-link">Admin Area</Link> : null;
 
     return (
         <div className="App">
@@ -59,6 +62,8 @@ function LoginScreen() {
             <h4> User Logged In: </h4>
             {user.email}
             {massage}
+            <br></br>
+            {adminLink}
             <button onClick={logout}> Sign Out </button>
 
         </div>
