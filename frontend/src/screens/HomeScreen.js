@@ -10,7 +10,7 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageWithInfo from "../components/ImageWithInfo";
 import io from "socket.io-client";
-import Graph from "./Graph";
+import Graph from "../components/Graph";
 // import data from '../data';
 
 const reducer = (state, action) => {

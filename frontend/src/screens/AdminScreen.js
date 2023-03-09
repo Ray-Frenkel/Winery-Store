@@ -10,6 +10,7 @@ import MessageBox from "../components/MessageBox";
 import React from "react";
 import Select from 'react-select';
 import AdminProduct from "../components/AdminProduct";
+import AdminAdd from "../components/AdminAdd";
 
 // import data from '../data';
 
@@ -191,8 +192,11 @@ function AdminScreen() {
             <Helmet>
                 <title>Ultimate Wine Store</title>
             </Helmet>
-            <h1>Our Products</h1>
-
+            <h1>Admin Area</h1>
+            <br></br>
+            <h3>Add new wine:</h3>
+            <AdminAdd></AdminAdd>
+            <br></br>
             <label htmlFor="winery">Winery: </label>
             <Select options={optionsWinery} onChange={(selectedOption) => checkWinery(selectedOption.value)} styles={customStyles} />
             <label htmlFor="location">Rating: </label>

@@ -90,5 +90,4 @@ productRouter.get('/search2/:type/:location/:price', async (req, res) => {
     res.status(404).send({ message: 'Product Not Found' });
   }
 });
-
 export default productRouter;

@@ -79,6 +79,7 @@ function AdminProduct(props) {
         await axios.post("http://localhost:5000/update/delete", productDelete);
     }
     return (
+
         <Card className="card">
             <img src={product.image} className="card-img-top" alt={product.wine} />
             <Card.Body>
