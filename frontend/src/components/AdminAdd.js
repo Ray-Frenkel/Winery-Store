@@ -62,6 +62,11 @@ function AdminAdd() {
     const handleLocationChange = (e) => {
         setLocation(e.target.value);
     };
+    const [image, setImage] = useState();
+
+    const handleImageChange = (e) => {
+        setImage(e.target.value);
+    };
     const [type, setType] = useState();
 
     const handleTypeChange = (e) => {
@@ -71,22 +76,59 @@ function AdminAdd() {
     const handlePriceChange = (e) => {
         setPrice(e.target.value);
     };
+    const [error, setError] = useState('');
+
+    const AddHandler = async (_id, winery, wine, rating, location, image, id, slug, type, price) => {
+        if (type !== "white" && type !== "red" && type !== "sparkling") {
+            setError('Invalid Type. Please enter either white, red or sparkling');
+            return;
+        }
+        setError('');
+        var productUpdate;
+        productUpdate = {
+            _id: _id,
+            winery: winery,
+            wine: wine,
+            rating: rating,
+            location: location,
+            image: image,
+            id: id,
+            slug: slug,
+            type: type,
+            price: price
+        };
+        window.alert("Update Completed!");
+        window.location.reload();
+        await axios.post("http://localhost:5000/update/add", productUpdate);
+
+    };
     return (
-
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span>Winery:</span>
-            <Select options={optionsWinery} onChange={(selectedOption) => setWinery(selectedOption.value)} styles={customStyles} />
-            <span style={{ marginLeft: '10px' }}>Wine:</span>
-            <input type="text" value={wine} onChange={handleWineChange} />
-            <span style={{ marginLeft: '10px' }}>Rating:</span>
-            <input type="number" value={rating} onChange={handleRatingChange} step="0.1" min="1" max="5" />
-            <span style={{ marginLeft: '10px' }}>Reviews:</span>
-            <input type="number" value={review} onChange={handleReviewChange} />
-            <span style={{ marginLeft: '10px' }}>Location:</span>
-            <Select options={optionsLocation} onChange={(selectedOption) => handleLocationChange(selectedOption.value)} styles={customStyles} />
-
+        <div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span>Winery:</span>
+                <Select options={optionsWinery} onChange={(selectedOption) => handleWineryChange(selectedOption.value)} styles={customStyles} />
+                <span style={{ marginLeft: '10px' }}>Wine:</span>
+                <input type="text" value={wine} onChange={handleWineChange} />
+                <span style={{ marginLeft: '10px' }}>Rating:</span>
+                <input type="number" value={rating} onChange={handleRatingChange} step="0.1" min="1" max="5" />
+                <span style={{ marginLeft: '10px' }}>Reviews:</span>
+                <input type="number" value={review} onChange={handleReviewChange} />
+                <span style={{ marginLeft: '10px' }}>Location:</span>
+                <Select options={optionsLocation} onChange={(selectedOption) => handleLocationChange(selectedOption.value)} styles={customStyles} />
+                <span style={{ marginLeft: '10px' }}>Image:</span>
+                <input type="text" value={image} onChange={handleImageChange} />
+            </div>
+            <div><br></br></div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={{ marginLeft: '10px' }}>Type:</span>
+                <input type="text" value={type} onChange={handleTypeChange} />
+                <span style={{ marginLeft: '10px' }}>Price:</span>
+                <input type="text" value={price} onChange={handlePriceChange} />
+                <Button className="btnproduct" style={{ marginLeft: '10px' }} onClick={() => AddHandler(winery, wine, rating, review, location, image, type, price)}>
+                    Add
+                </Button>
+            </div>
         </div>
-
     );
 }
 export default AdminAdd;
