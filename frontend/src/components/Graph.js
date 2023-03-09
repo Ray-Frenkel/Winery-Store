@@ -20,7 +20,7 @@ function Graph() {
           "/api/products/search" + "/all" + "/all" + "/all"
         );
         setResult(response.data);
-      } catch (err) {}
+      } catch (err) { }
     };
 
     fetchData();
@@ -59,7 +59,7 @@ function Graph() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="rating" fill="#8884d8" />
+        <Bar dataKey="amount" fill="#8884d8" />
       </BarChart>
     </div>
   );

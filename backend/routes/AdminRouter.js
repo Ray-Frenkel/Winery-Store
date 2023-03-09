@@ -45,5 +45,4 @@ AdminRouter.post('/delete', async (req, res) => {//Post Request - On Buy Now - G
     });
 
 });
-
 export default AdminRouter;
