@@ -59,7 +59,7 @@ function Graph() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="amount" fill="#8884d8" />
+        <Bar dataKey="rating" fill="#8884d8" />
       </BarChart>
     </div>
   );
