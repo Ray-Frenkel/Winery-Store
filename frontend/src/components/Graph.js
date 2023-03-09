@@ -44,7 +44,7 @@ const data = [
   { name: "Product 30", rating: 2.9 },
 ];
 function Graph() {
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,7 +76,7 @@ function Graph() {
 
   const wineryRatings = Object.values(wineryRatingsByLocation).map(({ name, count }) => ({
     name,
-    amount: count,
+    rating: count,
   }));
 
   return (
@@ -93,7 +93,7 @@ function Graph() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="amount" fill="#8884d8" />
+        <Bar dataKey="rating" fill="#8884d8" />
       </BarChart>
     </div>
   );
