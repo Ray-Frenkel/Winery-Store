@@ -10,6 +10,7 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageWithInfo from "../components/ImageWithInfo";
 import io from "socket.io-client";
+import Graph from "./Graph";
 // import data from '../data';
 
 const reducer = (state, action) => {
@@ -171,6 +172,7 @@ function HomeScreen() {
         have health benefits, with moderate wine consumption linked to a reduced
         risk of heart disease, stroke, and certain types of cancer.
       </p>
+      <Graph />
       <h1>Active Users: {activeUsers}</h1>
     </div>
   );

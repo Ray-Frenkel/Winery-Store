@@ -13,7 +13,6 @@ import AdminRouter from "./routes/AdminRouter.js";
 const app = express();
 const server = http.createServer(app); // create http server and pass express app as argument
 const io = new Server(server);
-
 let activeUsers = 0;
 
 io.on("connection", (socket) => {
