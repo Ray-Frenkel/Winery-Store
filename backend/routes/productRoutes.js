@@ -1,5 +1,6 @@
 import express from 'express';
 import Product from '../models/productModel.js';
+import Information from '../models/InformaitonModel.js';
 
 const productRouter = express.Router();
 
@@ -90,4 +91,17 @@ productRouter.get('/search2/:type/:location/:price', async (req, res) => {
     res.status(404).send({ message: 'Product Not Found' });
   }
 });
+productRouter.get("/get/:country", async (req, res) => {
+  //await Product.remove();
+  console.log("clicked!")
+  const answer = await Information.find({ country: req.params.country });
+  if (answer) {
+    res.send(answer);
+  } else {
+    res.status(404).send({ message: 'Information Not Found' });
+  }
+
+});
+
+
 export default productRouter;

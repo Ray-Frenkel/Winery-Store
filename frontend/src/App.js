@@ -16,6 +16,7 @@ import { Register } from "./screens/RegisterScreen";
 import React from "react";
 import CatalogScreen from "./screens/CatalogScreen";
 import AdminScreen from "./screens/AdminScreen";
+import InformationScreen from "./screens/InformaitonScreen";
 
 function App() {
   const { state } = useContext(Store);
@@ -27,7 +28,7 @@ function App() {
           <Navbar bg="dark" variant="dark">
             <Container>
               <LinkContainer to="/">
-                <Navbar.Brand>Ultimate Wine Site</Navbar.Brand>
+                <Navbar.Brand>Premuim Wine Site</Navbar.Brand>
               </LinkContainer>
               <Nav className="me-auto">
                 <Link to="/register" className="nav-link">
@@ -47,6 +48,9 @@ function App() {
                     </Badge>
                   )}
                 </Link>
+                <Link to="/tip" className="nav-link">
+                  Information
+                </Link>
               </Nav>
             </Container>
           </Navbar>
@@ -60,6 +64,7 @@ function App() {
               <Route path="/login" element={<LoginScreen />} />
               <Route path="/catalog" element={<CatalogScreen />} />
               <Route path="/admin" element={<AdminScreen />} />
+              <Route path="/tip" element={<InformationScreen />} />
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>

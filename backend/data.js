@@ -1,6 +1,17 @@
 let data;
 
 async function getData() {
+    data =
+    {
+        country: "Portugal",
+        location: "Douro Valley",
+        winery: ["Quinta do Crasto", "Ramos Pinto", "Quinta do Vale Meão"],
+        wine: ["Port", "Douro Red", "Vinho Verde"],
+        image: "https://upload.wikimedia.org/wikipedia/commons/9/9d/PRT.png"
+
+
+    };
+    /*
     try {
         const response = await fetch('https://api.sampleapis.com/wines/whites');
         const wines = await response.json();
@@ -20,6 +31,7 @@ async function getData() {
     } catch (error) {
         // handle the error
     }
+    */
 }
 
 await getData();

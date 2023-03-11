@@ -197,18 +197,22 @@ function AdminScreen() {
             <h3>Add new wine:</h3>
             <AdminAdd></AdminAdd>
             <br></br>
-            <label htmlFor="winery">Winery: </label>
-            <Select options={optionsWinery} onChange={(selectedOption) => checkWinery(selectedOption.value)} styles={customStyles} />
-            <label htmlFor="location">Rating: </label>
-            <Select options={optionsRating} onChange={(selectedOption) => checkRating(selectedOption.value)} styles={customStyles} />
-            <label htmlFor="location">Year: </label>
-            <Select options={optionsYear} onChange={(selectedOption) => checkYear(selectedOption.value)} styles={customStyles} />
-            <label htmlFor="location">Type: </label>
-            <Select options={optionsType} onChange={(selectedOption) => checkType(selectedOption.value)} styles={customStyles} />
-            <label htmlFor="location">Location: </label>
-            <Select options={optionsLocation} onChange={(selectedOption) => checkLocation(selectedOption.value)} styles={customStyles} />
-            <label htmlFor="location">Price: </label>
-            <Select options={optionsPrice} onChange={(selectedOption) => checkPrice(selectedOption.value)} styles={customStyles} />
+            <div className="select-row">
+                <label htmlFor="winery">Winery: </label>
+                <Select options={optionsWinery} onChange={(selectedOption) => checkWinery(selectedOption.value)} styles={customStyles} />
+                <label htmlFor="location">Rating: </label>
+                <Select options={optionsRating} onChange={(selectedOption) => checkRating(selectedOption.value)} styles={customStyles} />
+                <label htmlFor="location">Year: </label>
+                <Select options={optionsYear} onChange={(selectedOption) => checkYear(selectedOption.value)} styles={customStyles} />
+            </div>
+            <div className="select-row">
+                <label htmlFor="location">Type: </label>
+                <Select options={optionsType} onChange={(selectedOption) => checkType(selectedOption.value)} styles={customStyles} />
+                <label htmlFor="location">Location: </label>
+                <Select options={optionsLocation} onChange={(selectedOption) => checkLocation(selectedOption.value)} styles={customStyles} />
+                <label htmlFor="location">Price: </label>
+                <Select options={optionsPrice} onChange={(selectedOption) => checkPrice(selectedOption.value)} styles={customStyles} />
+            </div>
             <br></br>
             <div className="products">
                 <br></br>

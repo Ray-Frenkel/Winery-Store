@@ -12,15 +12,7 @@ function ImageWithInfo({ imageUrl, imageAlt, infoText, linkText, linkTo }) {
         alt={imageAlt}
         onClick={() => setShowInfo(!showInfo)}
       />
-      {showInfo && (
-        <div>
-          <p className="para">
-            {infoText}
-            <br></br>
-            <Link to="/catalog">Search on our Catalog</Link>
-          </p>
-        </div>
-      )}
+      {showInfo && { infoText }}
     </div>
   );
 }

@@ -45,4 +45,24 @@ AdminRouter.post('/delete', async (req, res) => {//Post Request - On Buy Now - G
     });
 
 });
+AdminRouter.post('/add', async (req, res) => {//Post Request - On Buy Now - Get the information and send it to addShopping function in db.js 
+    const data = {
+        winery: req.body.winery,
+        wine: req.body.wine,
+        rating: {
+            average: req.body.average,
+            reviews: req.body.reviews
+        },
+        location: req.body.location,
+        image: req.body.image,
+        id: req.body.id,
+        slug: req.body.id,
+        type: req.body.type,
+        price: req.body.price,
+
+    };
+    console.log(data);
+    Product.insertMany(data)
+
+});
 export default AdminRouter;

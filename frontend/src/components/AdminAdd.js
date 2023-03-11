@@ -76,28 +76,35 @@ function AdminAdd() {
     const handlePriceChange = (e) => {
         setPrice(e.target.value);
     };
+    const [id, setId] = useState();
+    const handleIdChange = (e) => {
+        setId(e.target.value);
+    };
     const [error, setError] = useState('');
 
-    const AddHandler = async (_id, winery, wine, rating, location, image, id, slug, type, price) => {
+    const AddHandler = async (winery, wine, rating, review, location, image, type, price, id) => {
+        console.log("add clicked!");
         if (type !== "white" && type !== "red" && type !== "sparkling") {
             setError('Invalid Type. Please enter either white, red or sparkling');
             return;
         }
         setError('');
+
         var productUpdate;
         productUpdate = {
-            _id: _id,
             winery: winery,
             wine: wine,
-            rating: rating,
+            average: rating,
+            review: review,
             location: location,
             image: image,
             id: id,
-            slug: slug,
             type: type,
             price: price
         };
-        window.alert("Update Completed!");
+
+        console.log(productUpdate);
+        window.alert("Add Completed!");
         window.location.reload();
         await axios.post("http://localhost:5000/update/add", productUpdate);
 
@@ -106,7 +113,7 @@ function AdminAdd() {
         <div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span>Winery:</span>
-                <Select options={optionsWinery} onChange={(selectedOption) => handleWineryChange(selectedOption.value)} styles={customStyles} />
+                <Select options={optionsWinery} onChange={(selectedOption) => setWinery(selectedOption.value)} styles={customStyles} />
                 <span style={{ marginLeft: '10px' }}>Wine:</span>
                 <input type="text" value={wine} onChange={handleWineChange} />
                 <span style={{ marginLeft: '10px' }}>Rating:</span>
@@ -114,7 +121,7 @@ function AdminAdd() {
                 <span style={{ marginLeft: '10px' }}>Reviews:</span>
                 <input type="number" value={review} onChange={handleReviewChange} />
                 <span style={{ marginLeft: '10px' }}>Location:</span>
-                <Select options={optionsLocation} onChange={(selectedOption) => handleLocationChange(selectedOption.value)} styles={customStyles} />
+                <Select options={optionsLocation} onChange={(selectedOption) => setLocation(selectedOption.value)} styles={customStyles} />
                 <span style={{ marginLeft: '10px' }}>Image:</span>
                 <input type="text" value={image} onChange={handleImageChange} />
             </div>
@@ -124,9 +131,15 @@ function AdminAdd() {
                 <input type="text" value={type} onChange={handleTypeChange} />
                 <span style={{ marginLeft: '10px' }}>Price:</span>
                 <input type="text" value={price} onChange={handlePriceChange} />
-                <Button className="btnproduct" style={{ marginLeft: '10px' }} onClick={() => AddHandler(winery, wine, rating, review, location, image, type, price)}>
+                <span style={{ marginLeft: '10px' }}>Id:</span>
+                <input type="text" value={id} onChange={handleIdChange} />
+                <Button className="btnproduct" style={{ marginLeft: '10px' }} onClick={() => AddHandler(winery, wine, rating, review, location, image, type, price, id)}>
                     Add
                 </Button>
+                <br></br>
+                <Card.Text className="card-text error-message">
+                    {error}
+                </Card.Text>
             </div>
         </div>
     );
