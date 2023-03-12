@@ -83,15 +83,18 @@ function InformationScreen() {
         const result = await axios.get(
             "/api/products/search2" + "/all" + "/" + country.name + "/all"
         );
-        console.log(response.data[0]);
+        const groupby = await axios.get(
+            "/api/products/groupby" + "/" + country.name
+        );
+        console.log(groupby.data[0].amount);
+        // console.log(response.data[0]);
+        setInfo(groupby.data[0].amount);
         setSelectedCountry(country.name)
         dispatch({ type: "FETCH_SUCCESS", payload: response.data });
-        console.log(result.data);
+        //console.log(result.data);
         dispatch1({ type: "FETCH_SUCCESS", payload: result.data });
 
     };
-
-
     return (
         <div>
             <div>
@@ -123,7 +126,7 @@ function InformationScreen() {
                             ))}
                         </Row>
                         <Row>
-                            <h3>Explore {products.length} Wines From {selectedCountry} in Our website!</h3>
+                            <h3>Explore {products.length} Wines From {selectedCountry} On total of {selectedInfo}$ in Our website!</h3>
                             {products.map((product) => (
                                 <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
                                     <Product product={product}></Product>

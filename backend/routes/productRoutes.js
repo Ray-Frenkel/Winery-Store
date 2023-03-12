@@ -102,6 +102,27 @@ productRouter.get("/get/:country", async (req, res) => {
   }
 
 });
+productRouter.get("/groupby/:location", async (req, res) => {
+  console.log("groupby!")
+  const products = await Product.aggregate([
+    {
+      $match: {
+        location: req.params.location !== "all" ? req.params.location : { $exists: true }
+      }
+    },
+    {
+      $group: {
+        _id: "$location",
+        amount: { $sum: "$price" }
+      }
+    }
+  ]);
+  if (products) {
+    res.send(products);
+  } else {
+    res.status(404).send({ message: 'Information Not Found' });
+  }
+});
 
 
 export default productRouter;
