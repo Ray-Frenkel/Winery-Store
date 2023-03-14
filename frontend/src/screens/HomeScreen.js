@@ -11,7 +11,6 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import ImageWithInfo from "../components/ImageWithInfo";
 import io from "socket.io-client";
 import Graph from "../components/Graph";
-import Button from "react-bootstrap/esm/Button";
 // import data from '../data';
 
 const reducer = (state, action) => {

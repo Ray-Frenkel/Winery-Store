@@ -107,7 +107,6 @@ main {
   object-fit: cover;
 }
 
-
 .card-body {
   display: flex;
   flex-wrap: wrap;
@@ -187,7 +186,7 @@ main {
 }
 
 .img-thumbnail {
-  height: 80px;
+  height: 120px;
 }
 
 .small-container {

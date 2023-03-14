@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 const shoppingSchema = new mongoose.Schema(
     {
-        name: { type: String, required: true },
         email: { type: String, required: true },
-        brand: { type: String, required: true },
+        winery: { type: String, required: true },
+        wine: { type: String, required: true },
         quantity: { type: Number, required: true },
         price: { type: Number, required: true },
     },

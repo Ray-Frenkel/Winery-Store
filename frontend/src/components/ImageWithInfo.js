@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, Route } from "react-router-dom";
-import CatalogScreen from "../screens/CatalogScreen";
 
 function ImageWithInfo({ imageUrl, imageAlt, infoText, linkText, linkTo }) {
   const [showInfo, setShowInfo] = useState(false);
@@ -12,7 +11,15 @@ function ImageWithInfo({ imageUrl, imageAlt, infoText, linkText, linkTo }) {
         alt={imageAlt}
         onClick={() => setShowInfo(!showInfo)}
       />
-      {showInfo && { infoText }}
+      {showInfo && (
+        <div>
+          <p className="para">
+            {infoText}
+            <br></br>
+            <Link to="/catalog">Search on our Catalog</Link>
+          </p>
+        </div>
+      )}
     </div>
   );
 }

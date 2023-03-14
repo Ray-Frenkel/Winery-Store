@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from 'react';
-import { createContext } from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 
 import {
     createUserWithEmailAndPassword,
@@ -15,7 +15,8 @@ function LoginScreen() {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const [user, setUser] = useState({});
-    const [massage, setError] = useState("");
+    const [message, setError] = useState("");
+
 
 
     onAuthStateChanged(auth, (currentUser) => {
@@ -59,13 +60,10 @@ function LoginScreen() {
                 <button onClick={login}> Login</button>
             </div>
 
-            <h4> User Logged In: </h4>
-            {user.email}
-            {massage}
-            <br></br>
-            {adminLink}
-            <button onClick={logout}> Sign Out </button>
 
+            {user.email ? <p>Welcome back!<br></br> {user.email} {adminLink}</p> : null}
+            {message}
+            <button onClick={logout}> Sign Out </button>
         </div>
     );
 }

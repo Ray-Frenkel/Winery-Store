@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Store } from "../Store";
 import { Helmet } from "react-helmet-async";
 import Row from "react-bootstrap/Row";
@@ -10,6 +10,7 @@ import Card from "react-bootstrap/Card";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import React from "react";
+import { AuthContext } from "../components/AuthContext";
 export default function CartScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
@@ -19,7 +20,6 @@ export default function CartScreen() {
   const updateCartHandler = async (item, quantity) => {
     const { data } = await axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
-      window.alert("Sorry. Product is out of stock");
       return;
     }
     ctxDispatch({
@@ -33,40 +33,49 @@ export default function CartScreen() {
 
   const checkoutHandler = async () => {
     var oneItem;
-    var name;
+    var winery;
+    var wine;
     var p;
     var q;
     var email = document.getElementById("email").value;
-    var username = document.getElementById("username").value;
-    if (email !== "" && username !== "") {
+    if (email !== "") {
       document.getElementById("username");
       cartItems.map(
         async (item) => (
           //name = item.name,
-          (name = item.name),
+          (winery = item.winery),
+          (wine = item.wine),
           (p = item.price),
           (q = item.quantity),
           (oneItem = {
-            name: username,
             email: email,
-            brand: name,
+            winery: winery,
+            wine: wine,
             quantity: q,
             price: p,
           }),
-          await axios.post("http://localhost:5000/", oneItem)
+          await axios.post("http://localhost:5000/buy", oneItem)
         )
       );
       window.alert("Thank you!");
       cartItems.map((item) => removeItemHandler(item));
-      document.getElementById("email").value = "";
-      document.getElementById("username").value = "";
     } else {
       window.alert(
         "You must fill both Name and Email fileds Please Try Again!"
       );
     }
   };
-
+  const { user } = useContext(AuthContext);
+  const [error, setError] = useState('');
+  const emailInputRef = useRef();
+  useEffect(() => {
+    if (user) {
+      emailInputRef.current.defaultValue = user.email;
+    }
+    else {
+      setError("You must Log In if you want to buy!")
+    }
+  }, [user]);
   return (
     <div>
       <Helmet>
@@ -75,6 +84,7 @@ export default function CartScreen() {
       <h1>Shopping Cart</h1>
       <Row>
         <Col md={8}>
+
           {cartItems.length === 0 ? (
             <MessageBox>
               Cart is empty. <Link to="/">Go Shopping</Link>
@@ -84,15 +94,22 @@ export default function CartScreen() {
               {cartItems.map((item) => (
                 <ListGroup.Item key={item._id}>
                   <Row className="align-items-center">
-                    <Col md={4}>
+                    <Col md={2}>
                       <img
                         src={item.image}
                         alt={item.name}
                         className="img-fluid rounded img-thumbnail"
                       ></img>{" "}
-                      <Link to={`/product/${item.slug}`}>{item.name}</Link>
                     </Col>
-                    <Col md={3}>
+                    <Col>
+                      <strong>Wine: {item.winery}</strong>
+                      <br></br>
+                      Winery: {item.wine}
+                      <br></br>
+                      Location: {item.location}
+                    </Col>
+
+                    <Col md={2}>
                       <Button
                         onClick={() =>
                           updateCartHandler(item, item.quantity - 1)
@@ -113,8 +130,8 @@ export default function CartScreen() {
                         <i className="fas fa-plus-circle"></i>
                       </Button>
                     </Col>
-                    <Col md={3}>${item.price}</Col>
-                    <Col md={2}>
+                    <Col md={1}>${item.price}</Col>
+                    <Col md={1}>
                       <Button
                         onClick={() => removeItemHandler(item)}
                         variant="light"
@@ -141,19 +158,20 @@ export default function CartScreen() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <div className="d-grid">
-                    <div>User Name:</div>
-                    <input id="username"></input>
                     <div>Email:</div>
-                    <input id="email"></input>
+                    <input id="email" ref={emailInputRef}></input>
                     <br></br>
                     <Button
                       type="button"
                       variant="primary"
                       onClick={checkoutHandler}
-                      disabled={cartItems.length === 0}
+                      disabled={cartItems.length === 0 || !user}
                     >
                       Buy Now!
                     </Button>
+                    <Card.Text className="card-text error-message">
+                      {error}
+                    </Card.Text>
                   </div>
                 </ListGroup.Item>
               </ListGroup>
