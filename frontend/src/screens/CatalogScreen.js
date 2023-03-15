@@ -117,6 +117,7 @@ function CatalogScreen() {
         { value: "Cartuxa", label: "Cartuxa" },
         { value: "Paul Hobbs", label: "Paul Hobbs" },
         { value: "Gaja", label: "Gaja" },
+        { value: "Recaredo", label: "Recaredo" },
     ];
     const optionsRating = [
         { value: "all", label: "all" },
@@ -139,9 +140,16 @@ function CatalogScreen() {
     const optionsYear = [
         { value: "all", label: "all" },
         { value: "1990", label: "1990" },
+        { value: "1993", label: "1993" },
+        { value: "1999", label: "1999" },
+        { value: "2000", label: "2000" },
         { value: "2001", label: "2001" },
+        { value: "2004", label: "2004" },
+        { value: "2005", label: "2005" },
+        { value: "2009", label: "2009" },
         { value: "2010", label: "2010" },
         { value: "2014", label: "2014" },
+        { value: "N.V.", label: "N.V." },
     ];
     const optionsLocation = [
         { value: "all", label: "all" },
@@ -150,6 +158,7 @@ function CatalogScreen() {
         { value: "Italy", label: "Italy" },
         { value: "Argentina", label: "Argentina" },
         { value: "Portugal", label: "Portugal" },
+        { value: "Spain", label: "Spain" },
     ];
     const optionsType = [
         { value: "all", label: "all" },

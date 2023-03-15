@@ -37,6 +37,7 @@ export default function CartScreen() {
     var wine;
     var p;
     var q;
+    var image;
     var email = document.getElementById("email").value;
     if (email !== "") {
       document.getElementById("username");
@@ -45,14 +46,16 @@ export default function CartScreen() {
           //name = item.name,
           (winery = item.winery),
           (wine = item.wine),
-          (p = item.price),
+          (p = item.price * item.quantity),
           (q = item.quantity),
+          (image = item.image),
           (oneItem = {
             email: email,
             winery: winery,
             wine: wine,
             quantity: q,
             price: p,
+            image: image,
           }),
           await axios.post("http://localhost:5000/buy", oneItem)
         )

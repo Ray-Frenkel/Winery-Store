@@ -10,6 +10,7 @@ shoppingRouter.post('/', async (req, res) => {//Post Request - On Buy Now - Get 
     var quantity = req.body.quantity;
     var price = req.body.price;
     var email = req.body.email;
+    var image = req.body.image;
     const data = {
         products: [
             {
@@ -19,10 +20,20 @@ shoppingRouter.post('/', async (req, res) => {//Post Request - On Buy Now - Get 
                 wine: wine,
                 quantity: quantity,
                 price: price,
+                image: image,
             },
         ]
     }
     const addedShopping = await Shopping.insertMany(data.products);
     res.send({ addedShopping });
+});
+shoppingRouter.get('/purchase/:email', async (req, res) => {
+    console.log("clicked purchase!")
+    const purchase = await Shopping.find({ "email": req.params.email });
+    if (purchase) {
+        res.send(purchase);
+    } else {
+        res.status(404).send({ message: 'Product Not Found' });
+    }
 });
 export default shoppingRouter;

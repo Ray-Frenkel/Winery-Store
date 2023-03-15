@@ -2,6 +2,7 @@ import { useState } from "react";
 import React from 'react';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import Button from "react-bootstrap/Button";
 
 import {
     createUserWithEmailAndPassword,
@@ -57,13 +58,17 @@ function LoginScreen() {
                 <h3> Login </h3>
                 <input placeholder="Email..." onChange={(event) => { setLoginEmail(event.target.value); }} />
                 <input placeholder="Password..." onChange={(event) => { setLoginPassword(event.target.value); }} />
-                <button onClick={login}> Login</button>
+                <Button onClick={login}> Login</Button>
             </div>
 
 
-            {user.email ? <p>Welcome back!<br></br> {user.email} {adminLink}</p> : null}
+            {user.email ? (
+                <div>
+                    <p>Welcome back!<br></br> {user.email} {adminLink} <Link to="/history">Your Purchase History</Link></p>
+                    <Button onClick={logout}> Sign Out </Button>
+                </div>
+            ) : null}
             {message}
-            <button onClick={logout}> Sign Out </button>
         </div>
     );
 }

@@ -17,6 +17,7 @@ import React from "react";
 import CatalogScreen from "./screens/CatalogScreen";
 import AdminScreen from "./screens/AdminScreen";
 import InformationScreen from "./screens/InformaitonScreen";
+import PurchaseScreen from "./screens/PurchaseScreen"
 import { AuthProvider } from "./components/AuthContext";
 function App() {
   const { state } = useContext(Store);
@@ -67,6 +68,7 @@ function App() {
                 <Route path="/catalog" element={<CatalogScreen />} />
                 <Route path="/admin" element={<AdminScreen />} />
                 <Route path="/tip" element={<InformationScreen />} />
+                <Route path="/history" element={<PurchaseScreen />} />
                 <Route path="/" element={<HomeScreen />} />
               </Routes>
             </Container>
