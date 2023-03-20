@@ -11,6 +11,7 @@ import React from "react";
 import Select from 'react-select';
 import AdminProduct from "../components/AdminProduct";
 import AdminAdd from "../components/AdminAdd";
+import AdminStats from "../components/AdminStats";
 
 // import data from '../data';
 
@@ -27,12 +28,28 @@ const reducer = (state, action) => {
             return state;
     }
 };
-
+const reducer1 = (state, action) => {
+    switch (action.type) {
+        case "FETCH_REQUEST":
+            return { ...state, loading: true };
+        case "FETCH_SUCCESS":
+            return { ...state, shoppings: action.payload, loading: false };
+        case "FETCH_FAIL":
+            return { ...state, loading: false, error: action.payload };
+        default:
+            return state;
+    }
+};
 function AdminScreen() {
     const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
         products: [],
         loading: true,
         error: "",
+    });
+    const [{ loading1, error1, shoppings }, dispatch1] = useReducer(logger(reducer1), {
+        shoppings: [],
+        loading1: true,
+        error1: "",
     });
     const [winery, setWinery] = useState("/all");
     const [rating, setRating] = useState("/all");
@@ -41,6 +58,7 @@ function AdminScreen() {
     const [type, setType] = useState("/all")
     const [price, setPrice] = useState("/all")
     const [flag, setFlag] = useState(0);
+    const [statFlg, setStatFlag] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,7 +69,6 @@ function AdminScreen() {
                     result = await axios.get(
                         "/api/products/search" + winery + rating + year
                     );
-
                 }
                 else {
                     result = await axios.get(
@@ -67,7 +84,16 @@ function AdminScreen() {
 
         fetchData();
     }, [winery, location, year, type, rating, price]);
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log("blabla");
+            let stat;
+            stat = await axios.get("/buy/stats");
+            dispatch1({ type: "FETCH_SUCCESS", payload: stat.data });
+        };
 
+        fetchData();
+    }, []);
     const checkWinery = (e) => {
         if (e != null) {
             setWinery("/" + e);
@@ -225,6 +251,22 @@ function AdminScreen() {
                         {products.map((product) => (
                             <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
                                 <AdminProduct product={product}></AdminProduct>
+                            </Col>
+                        ))}
+                    </Row>
+                )}
+            </div>
+            <div><h3>Shopping pre Winery:</h3>
+                <br></br>
+                {loading ? (
+                    <LoadingBox />
+                ) : error ? (
+                    <MessageBox variant="danger">{error}</MessageBox>
+                ) : (
+                    <Row>
+                        {shoppings.map((shopping) => (
+                            <Col sm={6} md={4} lg={3} className="mb-3">
+                                <AdminStats shopping={shopping}></AdminStats>
                             </Col>
                         ))}
                     </Row>

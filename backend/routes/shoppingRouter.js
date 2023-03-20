@@ -36,4 +36,21 @@ shoppingRouter.get('/purchase/:email', async (req, res) => {
         res.status(404).send({ message: 'Product Not Found' });
     }
 });
+shoppingRouter.get('/stats', async (req, res) => {
+    const pipeline = [
+        {
+            $group: {
+                _id: "$winery",
+                totalPrice: { $sum: "$price" },
+                totalQuantity: { $sum: "$quantity" }
+            }
+        }
+    ];
+
+    const result = await Shopping.aggregate(pipeline);
+
+    console.log(result);
+    res.json(result);
+});
+
 export default shoppingRouter;
